@@ -59,12 +59,18 @@
     FROM users
     WHERE name = "DeAndre Data";
 
+    Output: 'datad@comcast.net', 2008-01-20
+
   -The user ID for the user with email 'aleesia.algorithm@uw.edu'.
     SELECT userid
     FROM users
     WHERE email = 'aleesia.algorithm@uw.edu';
 
+    Output: 1
+
   -All the columns for the user ID equal to 4.
     SELECT *
     FROM users
     WHERE userid = 4;
+
+    Output: 4, Brandy Boolean, bboolean@nasa.gov, 1999-10-15
