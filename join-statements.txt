@@ -2,43 +2,67 @@
   You are able to find related data held in two separate data tables by using what is called a JOIN statement.
 
 2. Explain, in your own words, the difference between an INNER JOIN, LEFT OUTER JOIN, and RIGHT OUTER JOIN. Give a real-world example for each.
-  An INNER JOIN is the default JOIN used when finding related data in two separate data tables.
-
+  An INNER JOIN is the default JOIN used when finding related data in two separate data tables. With an INNER JOIN you are joining data from two tables using
+  a primary and a foreign key. You end up with one row for each result from each table. For example, let's say we have two tables: one that is a table of
+  customers who purchased items online (customers), and a second table that contains the information about the order (orders). We can combine the customers to
+  their order using a customer ID and order ID using an INNER JOIN to see if a specific product has been purchased. A LEFT OUTER JOIN allows you to combine
+  data from two tables such that you keep all the values from the first table regardless if there is a matching value from the second table. It will not remove
+  rows that do not have a matching value. We could use a LEFT OUTER JOIN to join customers to orders to see all the customers that made orders regardless of product
+  purchased. A RIGHT OUTER JOIN allows you to combine data from two tables such that you keep all the values from the second table regardless if there is a
+  matching value from the first table. It will not remove rows that do not have a matching value. We could use a RIGHT OUTER JOIN to join orders to customers to see
+  all of the orders that were made regardless of whether or not a payment was made with a debit card.
 
 3. Define primary key and foreign key. Give a real-world example for each.
-  A primary key is basically an identifier for the rows in a database table.  A foreign key is an identifier that is available on another table and can be
-  used to link the two tables. For example, if you have two tables, one with employees at a company, and a second table with salaries, you could have a
-  primary key of an employee ID number on the first table, and then have it be a foreign key on the second salary table.
+  A primary key is a identifier in a table. For example, if we have one table with employee names that work at a certain company (employees), our primary
+  key could be an employee identification number. A foreign key is a primary key that can be used in another table in order to join or link the two
+  together. In this example, we could have another table that contains the number of years the employee has worked for the company. This could be a primary
+  key in this particular table, and it can be a foreign key in the first table (employees).
 
 4. Define aliasing.
-  Aliasing is a way of writing shorthand names for table names in order to simplify what we are writing.
+  Aliasing is a way of writing shorthand names for tables in order to simplify what we are writing.
 
 5. Change this query so that you are using aliasing:
-  SELECT professor.name, compensation.salary,
-  compensation.vacation_days FROM professor JOIN
-  compensation ON professor.id =
-  compensation.professor_id;
+  SELECT p.name, c.salary, c.vacation_days
+  FROM professor AS p
+  JOIN compensation AS c ON p.id = c.professor_id;
 
 6. Why would you use a NATURAL JOIN? Give a real-world example.
-  You would use a NATURAL JOIN if you want to see 
+  You would use a NATURAL JOIN if you want to query columns that have the same name in two different tables. For example, if you had a table with a list of
+  hotel guests including room number, and if you have a table with rooms that also includes room number.
 
 7. Using this Employee schema and data, write queries to find the following information:
   -List all employees and all shifts.
+    SELECT *
+    FROM employees, scheduled_shifts;
 
 8. Using this Adoption schema and data, please write queries to retrieve the following information and include the results:
   -Create a list of all volunteers. If the volunteer is fostering a dog, include each dog as well.
+    SELECT volunteers.name, dogs.name
+    FROM volunteers
+    LEFT OUTER JOIN dogs
+    ON volunteers.foster_dog_id = dogs.id;
 
   -The cat's name, adopter's name, and adopted date for each cat adopted within the past month to be displayed as part of the "Happy Tail" social media
   promotion which posts recent successful adoptions.
+    SELECT cats.name, cats.adoption_date, adopters.first_name
+    FROM cats
+    JOIN cat_adoptions ON cats.id = cat_adoptions.id
+    JOIN adopters ON cat_adoptions.id = adopters.id
+    WHERE cats.adoption_date <= 30 days;
 
   -Create a list of adopters who have not yet chosen a dog to adopt.
+    SELECT adopters.first_name
+    FROM adopters
+
 
   -Lists of all cats and all dogs who have not been adopted.
 
   -The name of the person who adopted Rosco.
+
 
 9. Using this Library schema and data, write queries applying the following scenarios and include the results:
   -To determine if the library should buy more copies of a given book, please provide the names and position, in order, of all of the patrons with a hold
   (request for a book with all copies checked out) on "Advanced Potion-Making".
 
   -List all of the library patrons. If they have one or more books checked out, list the books with the patrons.
+    
