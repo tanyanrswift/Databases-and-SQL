@@ -1,7 +1,7 @@
 1. Write out a generic SELECT statement.
-  SELECT description
-  FROM dogs
-  WHERE breed='German Shepherd';
+  SELECT <column1, column2, ...*>
+  FROM <table1, table2 ...>
+  <optional: WHERE <condition>>
 
 2. Create a fun way to remember the order of operations in a SELECT statement, such as a mnemonic.
     Order of Operations: SFW (Safe for Work)
@@ -75,6 +75,16 @@ Intake teams typically guess the breed of shelter dogs, so the breed column may 
     <= less than or equal to-when we want to determine if one value is less than or equal to another (ex. 7.2 <= 7.2 is true)
     != not equal to-when we want to indicate that two values are not equal to one another (ex. 7.2 != 7.1 is true)
     = equal to-when we want to indicate that two values are equal to one another (ex. 7.2 = 7.2 is true)
+    <> not equal to-when we want to indicate that two values are not equal to one another (ex. 7.2 <> 7.1 is true)
+    LIKE-when we want to match a string (ex. input LIKE '%dog%' would match to 'bulldog')
+    BETWEEN-when we want to use two greater than or equal to and less than or equal to statements (ex. 6.5 BETWEEN 6 AND 7 is equivalent to 6.5 >= 6 and
+    6.5 <= 7)
+    IS DISTINCT FROM-when we want to use the <> operator but one of the inputs could be null (ex. WHERE 6.5 IS DISTINCT FROM 7)
+    IS TRUE/IS FALSE-when we want to determine whether or not an expression is true or false (ex. WHERE year < 1975 IS TRUE)
+    IS NULL-when we want to determine if a cell has no contents (ex. WHERE year = NULL)
+    AND-when we want to return a row and both statements are true (ex. WHERE name = 'Roberta' AND birth_year = 1975)
+    OR-when we want to return a row and either statement can be true (ex. WHERE age > 30 OR age < 50)
+    NOT-when we want to return a row and the statement is false (ex. WHERE NOT age = 25)
 
 7. From the cats table, what data is returned from these queries?
 INSERT INTO cats
