@@ -53,16 +53,36 @@
   -Create a list of adopters who have not yet chosen a dog to adopt.
     SELECT adopters.first_name
     FROM adopters
-
+    INNER JOIN dog_adoptions
+    ON dog_adoptions.adopter_id = null;
 
   -Lists of all cats and all dogs who have not been adopted.
+    SELECT cats.name
+    FROM cats
+    WHERE adoption_date = NULL;
+
+    SELECT dogs.name
+    FROM dogs
+    WHERE adoption_date = NULL;
 
   -The name of the person who adopted Rosco.
-
+    SELECT dogs.name
+    FROM dogs
+    LEFT OUTER JOIN adopters
+    ON dog_adoptions.adopter_id = adopters.id AND dog_adoptions.dog_id = dog.id;
 
 9. Using this Library schema and data, write queries applying the following scenarios and include the results:
   -To determine if the library should buy more copies of a given book, please provide the names and position, in order, of all of the patrons with a hold
   (request for a book with all copies checked out) on "Advanced Potion-Making".
+    SELECT patrons.name, holds.rank
+    FROM patrons
+    INNER JOIN holds
+    ON patrons.id = holds.patron_id;
 
   -List all of the library patrons. If they have one or more books checked out, list the books with the patrons.
-    
+    SELECT patrons.name, books.title
+    FROM patrons
+    LEFT OUTER JOIN transactions
+    ON patrons.id = transactions.patron_id
+    LEFT OUTER JOIN books
+    ON transactions.isbn = books.isbn;
