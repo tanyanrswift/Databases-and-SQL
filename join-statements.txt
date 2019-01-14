@@ -86,3 +86,4 @@
     ON patrons.id = transactions.patron_id
     LEFT OUTER JOIN books
     ON transactions.isbn = books.isbn;
+    WHERE books.checkout_out_date NOT NULL;
